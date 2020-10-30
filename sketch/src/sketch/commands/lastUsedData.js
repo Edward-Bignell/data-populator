@@ -14,7 +14,8 @@ export default async context => {
   Context(context)
 
   // get last used data
-  let lastUsedData = Utils.documentMetadata(context.document, 'lastUsedData')
+  //let lastUsedData = Utils.documentMetadata(context.document, 'lastUsedData')
+  let lastUsedData = Utils.getOrSetPluginSettings('lastUsedData')
   if (!lastUsedData) {
     return Context().document.showMessage(Strings(STRINGS.NO_LAST_USED_DATA))
   }

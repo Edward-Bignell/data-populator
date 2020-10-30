@@ -92,6 +92,7 @@ export function decode(encodedData) {
  * @return {String}
  */
 export function documentMetadata(doc, key, newValue) {
+
   let documentData = doc.documentData()
 
   // get user info dictionary
@@ -99,7 +100,6 @@ export function documentMetadata(doc, key, newValue) {
     documentData.setUserInfo(NSMutableDictionary.alloc().init())
   }
   let userInfo = NSMutableDictionary.dictionaryWithDictionary(documentData.userInfo())
-
   // get metadata for data populator
   if (!userInfo.valueForKey('com.datapopulator.sketch')) {
     userInfo.setValue_forKey(NSMutableDictionary.alloc().init(), 'com.datapopulator.sketch')
@@ -113,6 +113,22 @@ export function documentMetadata(doc, key, newValue) {
   }
 
   return data.valueForKey(key)
+}
+
+/**
+ * Get or set data stored as part of the Plugin Settings
+ *
+ * @param {String} key
+ * @param {String} value
+ * @return {String}
+ */
+export function getOrSetPluginSettings(key, value) { 
+  const Settings = require('sketch/settings');
+  if (value) {
+    Settings.setSettingForKey(key, value);
+  }
+  
+  return Settings.settingForKey(key);
 }
 
 /**

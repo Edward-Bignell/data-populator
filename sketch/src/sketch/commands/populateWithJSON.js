@@ -77,7 +77,8 @@ export default async (context, populateAgain) => {
   Options(options)
 
   // store data used to populate the layers
-  Utils.documentMetadata(context.document, 'lastUsedData', Utils.encode(data))
+  //Utils.documentMetadata(context.document, 'lastUsedData', Utils.encode(data))
+  Utils.getOrSetPluginSettings('lastUsedData', Utils.encode(data))
 
   // populate selected layers
   Populator.populateLayers(selectedLayers, data, options)
